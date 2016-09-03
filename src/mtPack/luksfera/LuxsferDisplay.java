@@ -11,7 +11,7 @@ import java.io.ObjectInputStream;
 
 public class LuxsferDisplay extends LuxEventsLayer {
     private static LuxsferDisplay instance;
-    private static String defaultDistortionPath = "F:\\fancy\\inżynierka\\LuxProjector\\LuxProjector\\Display_69732352";
+    private static String defaultDistortionPath = "F:\\fancy\\inżynierka\\LuxProjector\\LuxProjector\\Display_478496158";
 
     public static LuxsferDisplay make(int x, int y) {
         if (instance == null)
@@ -53,14 +53,7 @@ public class LuxsferDisplay extends LuxEventsLayer {
                 }
         );
 
-        try {
-            FileInputStream fis = new FileInputStream("F:\\fancy\\inżynierka\\LuxProjector\\LuxProjector\\plansza04.obj"); // todo placeholder
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            Object obj = ois.readObject();
-            luxsferColorBuffer = (Color[][]) obj;
-        } catch (Exception ex) {
-            System.out.println(ex);
-        }
+        luxsferColorBuffer = getColorMatrixPlaceholder(21, 21);
 
         setSize(640, 480);
         setVisible(true);
@@ -86,6 +79,18 @@ public class LuxsferDisplay extends LuxEventsLayer {
             e.printStackTrace();
             return null;
         }
+    }
+
+    private Color[][] getColorMatrixPlaceholder(int x, int y) {
+        Color[][] output = new Color[x][y];
+        Color color1 = Color.gray, color2 = Color.green;
+        for (int i = 0; i < x; i++)
+            for (int j = 0; j < y; j++)
+                if ((i + j) % 2 == 0)
+                    output[i][j] = color1;
+                else
+                    output[i][j] = color2;
+        return output;
     }
 
     public void paint(Graphics g) {
