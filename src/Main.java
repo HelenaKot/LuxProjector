@@ -76,7 +76,7 @@ public
 				public void actionPerformed(ActionEvent evt){
 					System.out.println("Run game");
 					//new mtPack.gameServer.NM2016Games( 8, 14, 5, 8, 2, 5).show();
-					new NM2016_MemoryGame( 9, 15, 8, 7, 1, 6);
+                    new GameLaunech(9, 15, 8, 7, 1, 6);
 				}
 			}
 		);
