@@ -1,20 +1,11 @@
 package mtPack.autoVideoCalibration;
 
-import java.awt.*;
-import java.awt.event.*;
 import java.awt.image.*;
 import java.io.*;
-import java.net.*;
-import java.text.DecimalFormat;
 
 import houghtransformation.*;
-import houghtransformation.HTImagePanelEx.DISPLAY_MODE;
-import houghtransformation.HTEngine.*;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
-
-import com.github.sarxos.webcam.*;
 
 public
 	class Main{

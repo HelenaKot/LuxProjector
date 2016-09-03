@@ -3,8 +3,7 @@ import java.awt.event.*;
 
 import javax.swing.BoxLayout;
 
-import mtPack.gameServer.NM2016Games;
-import mtPack.gameServer.NM2016_MemoryGame;
+import com.fancytank.gamegen.GameLaunech;
 import mtPack.houghCalibration.preCalibrationMain;
 import mtPack.luksfera.*;
 
