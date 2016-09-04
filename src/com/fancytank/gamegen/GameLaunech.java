@@ -1,13 +1,13 @@
 package com.fancytank.gamegen;
 
-import mtPack.luksfera.LuxsferDisplay;
+import mtPack.luksfera.event.LuxsferDisplayEvent;
 
 import java.io.InputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
 public class GameLaunech {
-    private LuxsferDisplay display;
+    private LuxAdapter display;
     private int offsetX, offsetY;
 
     ServerSocket ss;
@@ -17,7 +17,8 @@ public class GameLaunech {
     private boolean connectionLost = false;
 
     public GameLaunech(int screenWidth, int screenHeight, int x, int y, int offsetX, int offsetY) {
-        display = LuxsferDisplay.make(screenWidth, screenHeight);
+        SaveInstance saveInstance = DataManager.loadFile("test_json");
+        display = LuxAdapter.make(x, y, saveInstance); //todo save here
 
         this.offsetX = offsetX;
         this.offsetY = offsetY;
@@ -34,7 +35,7 @@ public class GameLaunech {
                         soc = ss.accept();
                         System.out.println("I have a Connection");
                         is = soc.getInputStream();
-                        runGame();
+                        runGameLoop();
                         System.out.println("Game initiated");
                     } catch (Exception ex) {
                         System.out.println("A: " + ex);
@@ -51,41 +52,37 @@ public class GameLaunech {
     public void initNewGame() {
     }
 
-    public void runGame() {
+    public void runGameLoop() {
         if (!connectionLost)
             initNewGame();
         else
             connectionLost = false;
         paintGameBord();
+
+        /** game logic
+         * read input
+         * react to input **/
     }
 
     public int[] read() {
         try {
-            int wrt = 'p';//is.read();
+            int wrt = 'p';
             switch (wrt) {
                 case 'p':
-                    int y = is.read()-'0';
-                    int x = is.read()-'0';
-                    System.out.println("r: " + x + " " + y + " " + x + " " + (6 - y));
+                    int y = is.read() - '0';
+                    int x = is.read() - '0';
                     y = 6 - y;
-                    System.out.println("r: " + x + " " + y);
+                    System.out.println("p: " + x + " " + y);
                     return new int[]{x, y};
-                case 'l':
-                    break;
-                case 'r':
-                    break;
             }
         } catch (Exception ex) {
-            System.out.println(ex);
             ex.printStackTrace();
         }
         return null;
     }
 
     public void paintGameBord() {
-        display.fireLuxsferDisplayEvent(
-                new mtPack.luksfera.event.LuxsferDisplayEvent(this, mtPack.luksfera.event.LuxsferDisplayEvent.LUXSFERDISPLAYPIXELCHANGED)
-        );
+        display.fireLuxsferDisplayEvent(new LuxsferDisplayEvent(this, LuxsferDisplayEvent.LUXSFERDISPLAYPIXELCHANGED));
     }
 
 }

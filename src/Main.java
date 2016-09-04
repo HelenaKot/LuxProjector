@@ -3,21 +3,23 @@ import java.awt.event.*;
 
 import javax.swing.BoxLayout;
 
+import com.fancytank.gamegen.DataManager;
 import com.fancytank.gamegen.GameLaunech;
+import com.fancytank.gamegen.SaveInstance;
 import mtPack.houghCalibration.preCalibrationMain;
 import mtPack.luksfera.*;
 
 public
 	class Main
 	extends Frame{
-	
+
 	public static void main(String[] args){
 		new Main();
 	}
-	
+
 	public Main(){
 		super("Control window");
-		
+
 		addWindowListener(
 			new WindowAdapter(){
 				public void windowClosing(WindowEvent evt){
@@ -25,9 +27,9 @@ public
 				}
 			}
 		);
-		
+
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		
+
 		Button preCalibrationButton = new Button("preCalibration");
 		preCalibrationButton.addActionListener(
 			new ActionListener(){
@@ -37,7 +39,7 @@ public
 			}
 		);
 		add(preCalibrationButton);
-		
+
 		Button calibrateButton = new Button("Kalibracja");
 		calibrateButton.addActionListener(
 			new ActionListener(){
@@ -47,7 +49,7 @@ public
 			}
 		);
 		add(calibrateButton);
-		
+
 		Button projectorButton = new Button("Projector");
 		projectorButton.addActionListener(
 			new ActionListener(){
@@ -57,7 +59,7 @@ public
 			}
 		);
 		add(projectorButton);
-		
+
 		Button creatorButton = new Button("Creator");
 		creatorButton.addActionListener(
 			new ActionListener(){
@@ -68,7 +70,7 @@ public
 			}
 		);
 		add(creatorButton);
-		
+
 		Button gameButton = new Button("Game");
 		gameButton.addActionListener(
 			new ActionListener(){
@@ -80,7 +82,6 @@ public
 			}
 		);
 		add(gameButton);
-		
 		setSize( 300, 400);
 		setVisible(true);
 	}

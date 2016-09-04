@@ -19,7 +19,7 @@ public
         
         try {
         	
-           defaultImageBuf = ImageIO.read(new File("/Users/tomaszew2/git/LuxsferyProject/LuxProjector/room.png"));
+           defaultImageBuf = ImageIO.read(new File("F:\\fancy\\inżynierka\\LuxProjector\\LuxProjector\\room.png"));
         } catch (IOException e) {
         	System.out.println(e);
         }

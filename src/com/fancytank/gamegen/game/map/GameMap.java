@@ -3,14 +3,16 @@ package com.fancytank.gamegen.game.map;
 import com.fancytank.gamegen.game.Constant;
 import com.fancytank.gamegen.game.actor.ActorInitializer;
 import com.fancytank.gamegen.game.actor.BaseActor;
+import com.fancytank.gamegen.game.actor.EmptyActor;
 import com.fancytank.gamegen.game.actor.TileType;
 
+import java.awt.*;
+
 public class GameMap {
-    int widthPadding;
+    private static Color placeholderColor = Color.darkGray;
     private BaseActor[][] map;
 
     public GameMap init() {
-        widthPadding = Constant.MAP_PADDING;
         if (map == null)
             initEmptyMap(Constant.MAP_WIDTH, Constant.MAP_HEIGHT);
         return this;
@@ -46,7 +48,15 @@ public class GameMap {
         return map;
     }
 
+    public Color getColorAt(int x, int y) {
+        if (inBounds(x, y))
+            return map[x][y].tint;
+        return placeholderColor;
+    }
+
     private void initActor(BaseActor block) {
+        if (block instanceof EmptyActor)
+            block.tint = Color.black;
         map[block.x][block.y] = block;
     }
 }

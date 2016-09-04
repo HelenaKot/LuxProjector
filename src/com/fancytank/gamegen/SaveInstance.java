@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-public class  SaveInstance implements Serializable {
+public class SaveInstance implements Serializable {
     private static final long serialVersionUID = 1233613063064496930L;
     public ProgrammingBlockSavedInstance[] blocks;
     public LinkedList<TileType> tiles;

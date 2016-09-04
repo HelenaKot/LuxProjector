@@ -6,8 +6,6 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
-import mtPack.luksfera.LuxsferDisplay;
-
 public 
 	class NM2016_MemoryGame {
 	
@@ -141,11 +139,11 @@ public
 	
 	public int[] read(){
 		try{
-			int wrt = is.read();
+			int wrt = 'p';//is.read();
 			switch(wrt){
 				case 'p':
-					int y = is.read()-'0';
-					int x = is.read()-'0';
+					int y = 2;//is.read()-'0';
+					int x = 2;//is.read()-'0';
 					System.out.println("r: "+x+" "+y+" "+x+" "+(6-y));
 					//x = 8 - x;
 					y = 6 - y;

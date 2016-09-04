@@ -2,6 +2,7 @@ package com.fancytank.gamegen.game.map;
 
 import com.fancytank.gamegen.game.actor.BaseActor;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class MapManager {
@@ -29,6 +30,10 @@ public class MapManager {
                 if (actor.getClassName().equals(className))
                     output.add(actor);
         return output;
+    }
+
+    public Color getColorAt(int x, int y) {
+        return instance.gameMap.getColorAt(x, y);
     }
 
     public static void dispose() {
