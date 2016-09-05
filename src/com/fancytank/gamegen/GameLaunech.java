@@ -14,11 +14,9 @@ public class GameLaunech {
     Socket soc;
     InputStream is;
 
-    private boolean connectionLost = false;
-
     public GameLaunech(int screenWidth, int screenHeight, int x, int y, int offsetX, int offsetY) {
-        SaveInstance saveInstance = DataManager.loadFile("test_json");
-        display = LuxAdapter.make(x, y, saveInstance); //todo save here
+        SaveInstance saveInstance = DataManager.loadFile("press_demo_json");
+        display = LuxAdapter.make(x, y, saveInstance);
 
         this.offsetX = offsetX;
         this.offsetY = offsetY;
@@ -29,18 +27,27 @@ public class GameLaunech {
                 } catch (Exception ex) {
                     System.out.println("Ex" + ex);
                 }
+
+                /* hardoce test
+                display.onPress(2, 2);
+                display.onPress(4, 4);
+                display.onPress(6, 6);
+                display.onPress(10, 10);
+                */
+                paintGameBord();
+                runTimer();
                 while (true) {
+
                     try {
                         System.out.println("W8 4 new conn");
                         soc = ss.accept();
                         System.out.println("I have a Connection");
                         is = soc.getInputStream();
-                        runGameLoop();
+                        runInputLoop();
                         System.out.println("Game initiated");
                     } catch (Exception ex) {
                         System.out.println("A: " + ex);
                         ex.printStackTrace();
-                        connectionLost = true;
                     }
                 }
             }
@@ -48,20 +55,28 @@ public class GameLaunech {
         paintGameBord();
     }
 
+    int[] input;
 
-    public void initNewGame() {
+    public void runInputLoop() {
+        input = read();
+        display.onPress(input[0], input[1]);
+        paintGameBord();
     }
 
-    public void runGameLoop() {
-        if (!connectionLost)
-            initNewGame();
-        else
-            connectionLost = false;
-        paintGameBord();
-
-        /** game logic
-         * read input
-         * react to input **/
+    public void runTimer() {
+        new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    while (true) {
+                        Thread.sleep(100);
+                        display.onTick();
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.run();
     }
 
     public int[] read() {

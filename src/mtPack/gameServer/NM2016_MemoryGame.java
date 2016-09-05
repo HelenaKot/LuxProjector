@@ -139,11 +139,11 @@ public
 	
 	public int[] read(){
 		try{
-			int wrt = 'p';//is.read();
+			int wrt = is.read();
 			switch(wrt){
 				case 'p':
-					int y = 2;//is.read()-'0';
-					int x = 2;//is.read()-'0';
+					int y = is.read()-'0';
+					int x = is.read()-'0';
 					System.out.println("r: "+x+" "+y+" "+x+" "+(6-y));
 					//x = 8 - x;
 					y = 6 - y;

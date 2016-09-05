@@ -10,7 +10,8 @@ public enum ValueType implements Serializable {
     INT_NUMBER(),
     CLASS_NAME(MethodType.BLOCK_SETTER),
     METHOD(),
-    VARIABLE();
+    VARIABLE(),
+    SCREEN(MethodType.SCREEN_SWAPPER);;
 
     private static final long serialVersionUID = 1233613063064496950L;
     MethodType expectedMethod;
@@ -25,20 +26,4 @@ public enum ValueType implements Serializable {
     static ValueType[] usedValues;
     static String[] valueNames;
 
-    public static ValueType[] getValuesList() {
-        initValues();
-        return usedValues;
-    }
-
-    public static String[] getValueStrings() {
-        initValues();
-        return valueNames;
-    }
-
-    private static void initValues() {
-        if (usedValues == null) {
-            usedValues = new ValueType[]{BOOLEAN, COLOR, NUMBER, INT_NUMBER, CLASS_NAME, METHOD};
-            valueNames = new String[]{"boolean", "color", "number", "integer", "class", "method"};
-        }
-    }
 }

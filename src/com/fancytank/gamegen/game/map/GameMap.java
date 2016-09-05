@@ -10,7 +10,7 @@ import java.awt.*;
 
 public class GameMap {
     private static Color placeholderColor = Color.darkGray;
-    private BaseActor[][] map;
+    BaseActor[][] map;
 
     public GameMap init() {
         if (map == null)

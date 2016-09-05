@@ -1,5 +1,9 @@
 package com.fancytank.gamegen;
 
+import com.fancytank.gamegen.game.actor.ActorInitializer;
+import com.fancytank.gamegen.game.actor.CustomActorToInit;
+import com.fancytank.gamegen.game.actor.TileType;
+import com.fancytank.gamegen.game.map.BoardManager;
 import com.google.gson.Gson;
 
 import java.io.*;
@@ -21,6 +25,12 @@ public class DataManager {
             String json = sb.toString();
             Gson gson = new Gson();
             SaveInstance si = gson.fromJson(json, SaveInstance.class);
+
+            new ActorInitializer();
+            for (TileType tile : si.tiles)
+                ActorInitializer.addActorClass(new CustomActorToInit(tile));
+            BoardManager.setInstance(si.boards);
+
             return si;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
