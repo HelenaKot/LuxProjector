@@ -12,7 +12,10 @@ public class TileType implements Serializable {
     public TileType(String name, String textureName, String colorHex) {
         this.name = name;
         this.textureName = textureName;
-        this.colorHex = colorHex.toLowerCase();
+        if (colorHex.length() > 7) //alpha saved
+            this.colorHex = "#" + colorHex.substring(2, 8).toLowerCase();
+        else
+            this.colorHex = colorHex.toLowerCase();
     }
 
 }

@@ -26,10 +26,10 @@ public class DataManager {
             Gson gson = new Gson();
             SaveInstance si = gson.fromJson(json, SaveInstance.class);
 
+            BoardManager.setInstance(si.boards);
             new ActorInitializer();
             for (TileType tile : si.tiles)
                 ActorInitializer.addActorClass(new CustomActorToInit(tile));
-            BoardManager.setInstance(si.boards);
 
             return si;
         } catch (FileNotFoundException e) {

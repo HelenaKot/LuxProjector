@@ -1,23 +1,20 @@
 package com.fancytank.gamegen.game.script;
 
 import com.fancytank.gamegen.game.actor.ActorInitializer;
-import com.fancytank.gamegen.programming.data.BlockData;
-import com.fancytank.gamegen.programming.data.InputFragment;
-import com.fancytank.gamegen.programming.data.ProgrammingBlockSavedInstance;
-import com.fancytank.gamegen.programming.data.ValueType;
-import com.fancytank.gamegen.programming.data.VariableList;
+import com.fancytank.gamegen.programming.data.*;
 
 import static com.fancytank.gamegen.game.script.ExecutableProducer.ActionListenerType;
+import static com.fancytank.gamegen.programming.data.BlockShape.*;
 
 public class ScriptLoader {
     public static void load(ProgrammingBlockSavedInstance[] data) {
         for (ProgrammingBlockSavedInstance savedBlock : data)
+            if (savedBlock.data.shape == VARIABLE_DECLARATION)
+                loadVariable(savedBlock.data);
+        for (ProgrammingBlockSavedInstance savedBlock : data)
             switch (savedBlock.data.shape) {
                 case ACTION_LISTENER:
                     loadListener(savedBlock.data);
-                    break;
-                case VARIABLE_DECLARATION:
-                    loadVariable(savedBlock.data);
                     break;
                 case TIMER:
                     loadTimer(savedBlock.data);

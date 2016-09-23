@@ -19,8 +19,6 @@ public class LuxAdapter extends AbstractDisplay {
 
     public static LuxAdapter make(int x, int y, SaveInstance data) {
         if (instance == null) {
-            Constant.setUpBlockConstants(x, y);
-            new ActorInitializer();
             ScriptLoader.load(data.blocks);
             instance = new LuxAdapter(x, y);
             instance.save = data;
@@ -44,8 +42,8 @@ public class LuxAdapter extends AbstractDisplay {
     protected void initMap() {
         map = new GameMap();
         mapManager = new MapManager(map);
-        mapManager.setBoard(BoardManager.get("default"));
-        gameHeight = BoardManager.get("default").height - 1;
+        MapManager.setBoard(BoardManager.get("default"));
+        gameHeight = Constant.MAP_HEIGHT - 1;
     }
 
     @Override

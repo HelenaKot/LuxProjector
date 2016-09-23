@@ -1,5 +1,6 @@
 package com.fancytank.gamegen;
 
+import com.fancytank.gamegen.game.Constant;
 import mtPack.luksfera.event.LuxsferDisplayEvent;
 
 import java.io.InputStream;
@@ -15,7 +16,8 @@ public class GameLaunech {
     InputStream is;
 
     public GameLaunech(int screenWidth, int screenHeight, int x, int y, int offsetX, int offsetY) {
-        SaveInstance saveInstance = DataManager.loadFile("press_demo_json");
+        Constant.setUpBlockConstants(screenWidth, screenHeight);
+        SaveInstance saveInstance = DataManager.loadFile("demo_json");
         display = LuxAdapter.make(x, y, saveInstance);
 
         this.offsetX = offsetX;
@@ -69,8 +71,9 @@ public class GameLaunech {
             public void run() {
                 try {
                     while (true) {
-                        Thread.sleep(100);
+                        Thread.sleep(10);
                         display.onTick();
+                        paintGameBord();
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();

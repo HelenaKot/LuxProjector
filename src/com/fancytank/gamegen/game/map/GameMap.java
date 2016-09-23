@@ -20,9 +20,9 @@ public class GameMap {
 
     public void setBoard(Board mapBoard) {
         TileType[][] board = mapBoard.board;
-        map = new BaseActor[mapBoard.width][mapBoard.height];
-        for (int x = 0; x < mapBoard.width; x++)
-            for (int y = 0; y < mapBoard.height; y++)
+        map = new BaseActor[Constant.MAP_WIDTH][Constant.MAP_HEIGHT];
+        for (int x = 0; x < Constant.MAP_WIDTH; x++)
+            for (int y = 0; y < Constant.MAP_HEIGHT; y++)
                 initActor(ActorInitializer.getInstanceOf(board[x][y].name, x, y));
     }
 
@@ -41,7 +41,7 @@ public class GameMap {
     }
 
     private boolean inBounds(int x, int y) {
-        return 0 <= x && x < map.length && 0 <= y && y < map[0].length;
+        return 0 <= x && x < Constant.MAP_WIDTH && 0 <= y && y < Constant.MAP_HEIGHT;
     }
 
     public BaseActor[][] getMap() {

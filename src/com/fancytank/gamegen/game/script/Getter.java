@@ -26,6 +26,8 @@ public class Getter implements Executable {
                 return new Variable(String.valueOf(blockInstance.x), ValueType.INT_NUMBER);
             case 'y':
                 return new Variable(String.valueOf(blockInstance.y), ValueType.INT_NUMBER);
+            case 't':
+                return new Variable(blockInstance.getClassName(), ValueType.CLASS_NAME);
         }
         return null;
     }
